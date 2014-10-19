@@ -1,0 +1,7 @@
+{
+  "name": "my-node-app",
+  "description": "this is my app",
+  "engines": {
+     "node": "0.10.26"
+  }
+}
