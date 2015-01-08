@@ -15,8 +15,8 @@ import cf.client.bluemix.BluemixClientException;
 public class BluemixClientTest {
 
 	// Bluemix credentials
-	private static String user = "user@email.com";
-	private static String password = "user_password";
+	private static String user = System.getenv("BLUEMIX_USER");
+	private static String password = System.getenv("BLUEMIX_PASSWORD");
 	
 	private static BluemixClient client; 
 	

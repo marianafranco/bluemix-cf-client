@@ -24,8 +24,8 @@ public class BluemixClient {
 	
 	private static final Logger LOGGER = Logger.getLogger(BluemixClient.class.getName());
 
-	// API endpoint (version 2.2.0)
-	private static final String BLUEMIX_API = "https://api.ng.bluemix.net";
+	// API endpoint (version 2.2.0) used to access bluemix (e.g. "https://api.ng.bluemix.net")
+	private static final String BLUEMIX_API = System.getenv("BLUEMIX_API");
 	
 	private CloudFoundryClient client;
 	
