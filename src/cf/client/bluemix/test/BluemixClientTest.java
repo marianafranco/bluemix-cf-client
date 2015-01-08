@@ -41,7 +41,7 @@ public class BluemixClientTest {
 		List<String> serviceNames = Arrays.asList(dbName);
 		
 		// creating a new application
-		String appName = "my-java-web-app";
+		String appName = "my-java-web-app-" + System.currentTimeMillis();
 		File warFile = new File("test-apps/webApp.war");
 		client.createApp(appName, warFile, serviceNames, null, "liberty-for-java", 128);
 		Assert.assertEquals("STARTED", client.getAppState(appName));
@@ -60,7 +60,7 @@ public class BluemixClientTest {
 	@Test
 	public void deployNode() throws BluemixClientException {
 		// creating a new application
-		String appName = "my-node-app";
+		String appName = "my-node-app-" + System.currentTimeMillis();
 		File appFile = new File("test-apps/nodeApp.zip");
 		client.createApp(appName, appFile, null, "node app.js", "sdk-for-nodejs", 128);
 		Assert.assertEquals("STARTED", client.getAppState(appName));
