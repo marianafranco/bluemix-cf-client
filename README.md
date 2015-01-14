@@ -23,7 +23,6 @@ After that, you must include this repository source code in your project's class
 
 Usage
 -----
-
 First, you need to create a new instance of the **BluemixClient** informing your user, password, organization and space:
 
 ```java
@@ -45,3 +44,6 @@ Check the [**BluemixClient**](https://github.com/marianafranco/bluemix-cf-client
 
 Examples
 --------
+You can find some examples about how to use this library on the [**BluemixClientTest**](https://github.com/marianafranco/bluemix-cf-client/blob/master/src/cf/client/bluemix/test/BluemixClientTest.java) class.
+
+For now, there are two tests showing how to deploy a NodeJS and Java application. To run the tests you need to set the BLUEMIX_USER and BLUEMIX_PASSWORD environment variables with your Bluemix credentials.
