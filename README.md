@@ -24,6 +24,24 @@ After that, you must include this repository source code in your project's class
 Usage
 -----
 
+First, you need to create a new instance of the **BluemixClient** informing your user, password, organization and space:
+
+```java
+BluemixClient client = new BluemixClient(user, password, orgName, spaceName);
+```
+
+Next, you need to login to Bluemix:
+
+```java
+client.login();
+```
+
+After logged in, you will be able to perform some basic operations using the client instance, such as:
+- create or delete an application in Bluemix;
+- create or delete a service;
+- and start or stop an application.
+
+Check the [**BluemixClient**](https://github.com/marianafranco/bluemix-cf-client/blob/master/src/cf/client/bluemix/BluemixClient.java) class to get more details about the possible operations.
 
 Examples
 --------
