@@ -15,9 +15,9 @@ import org.cloudfoundry.client.lib.domain.CloudService;
 import org.cloudfoundry.client.lib.domain.Staging;
 
 /**
+ * A Java client to deploy applications on Bluemix.
  * 
- * 
- * @author marianafranco
+ * @author Mariana Ramos Franco
  *
  */
 public class BluemixClient {
@@ -26,23 +26,65 @@ public class BluemixClient {
 
 	private CloudFoundryClient client;
 	
-	public BluemixClient(String user, String password, String orgName, String spaceName, String api)
-			throws BluemixClientException {
+	/**
+	 * Client constructor.
+	 * 
+	 * @param user
+	 * 			the user name.
+	 * @param password
+	 * 			the password.
+	 * @param orgName
+	 * 			the organization.
+	 * @param spaceName
+	 * 			the space (e.g. "dev").
+	 * @param api
+	 * 			the API endpoint URL to access Bluemix (e.g. "https://api.ng.bluemix.net").
+	 * 
+	 * @throws BluemixClientException
+	 */
+	public BluemixClient(String user, String password, String orgName, String spaceName,
+			String api) throws BluemixClientException {
 		CloudCredentials credentials = new CloudCredentials(user, password);
 		URL target = getTarget(api);
 		client = new CloudFoundryClient(credentials, target, orgName, spaceName);
 	}
 	
+	/**
+	 * Logging to Bluemix.
+	 */
 	public void login() {
-		LOGGER.info("Loging to BlueMix...");
+		LOGGER.info("Logging to BlueMix...");
         client.login();
 	}
 	
+	/**
+	 * Logging out from Bluemix.
+	 */
 	public void logout() {
-		LOGGER.info("Loging out from BlueMix...");
+		LOGGER.info("Logging out from BlueMix...");
         client.logout();
 	}
 	
+	/**
+	 * Creates a new application in Bluemix.
+	 * 
+	 * @param appName
+	 * 			the application's name.
+	 * @param app
+	 * 			the application's file (e.g. a WAR file or zip file).
+	 * @param serviceNames
+	 * 			array with the name of the services that will be bind to this application or NULL. 
+	 * @param command
+	 * 			the command used to start the application.
+	 * @param buildpack
+	 * 			the buildpack that will be used to deploy the application (e.g. liberty-for-java).
+	 * 			You can see the list of available buildpacks through the command "cf buildpacks".
+	 * @param memory
+	 * 			the amount of memory in MB (128, 256, 512, etc) available to the application.
+	 * 			If NULL a default value of 512 is used.
+	 * 			
+	 * @throws BluemixClientException
+	 */
 	public void createApp(String appName, File app, List<String> serviceNames,
 			String command, String buildpack, Integer memory)
 					throws BluemixClientException {
@@ -77,6 +119,16 @@ public class BluemixClient {
         client.startApplication(appName);
 	}
 	
+	/**
+	 * Updates an application in Bluemix.
+	 * 
+	 * @param appName
+	 * 			the application's name.
+	 * @param app
+	 * 			the application's file (e.g. a WAR file or zip file).
+	 * 
+	 * @throws BluemixClientException
+	 */
 	public void updateApp(String appName, File app) throws BluemixClientException {
 
 		if (null == appName || null == app) {
@@ -100,6 +152,20 @@ public class BluemixClient {
         client.startApplication(appName);
 	}
 	
+	/**
+	 * Creates a new service in Bluemix.
+	 * Note that you can get the services and plans available in Bluemix through the
+	 * "cf marketplace" command. 
+	 * 
+	 * @param label
+	 * 			the service's label (e.g. "sqldb"). 
+	 * @param name
+	 * 			the service's name.
+	 * @param plan
+	 * 			the service's plan.
+	 * 
+	 * @throws BluemixClientException
+	 */
 	public void createService(String label, String name, String plan)
 			throws BluemixClientException {
 		
@@ -116,24 +182,57 @@ public class BluemixClient {
         client.createService(service);
 	}
 	
+	/**
+	 * Starts an application in Bluemix.
+	 * 
+	 * @param appName
+	 * 			the application's name.
+	 */
 	public void startApp(String appName) {
 		client.startApplication(appName);
 	}
 	
+	/**
+	 * Stops an application in Bluemix.
+	 * 
+	 * @param appName
+	 * 			the application's name.
+	 */
 	public void stopApp(String appName) {
 		client.stopApplication(appName);
 	}
 	
+	/**
+	 * Deletes an application from Bluemix.
+	 * 
+	 * @param appName
+	 * 			the application's name.
+	 */
 	public void deleteApp(String appName) {
 		LOGGER.info("Deleting app...");
 		client.deleteApplication(appName);
 	}
 	
+	/**
+	 * Deletes a service from Bluemix.
+	 * 
+	 * @param service
+	 * 			the service's name.
+	 */
 	public void deleteService(String service) {
 		LOGGER.info("Deleting service...");
 		client.deleteService(service);
 	}
 	
+	/**
+	 * Returns the application's state (e.g. START or STOP).
+	 * 
+	 * @param appName
+	 * 			the application's name.
+	 * @return the application's state.
+	 * 
+	 * @throws BluemixClientException
+	 */
 	public String getAppState(String appName) throws BluemixClientException {
 		try {
 			return client.getApplication(appName).getState().toString();
@@ -143,6 +242,12 @@ public class BluemixClient {
 		}
 	}
 	
+	/**
+	 * Returns the CloudFoundClient instance that can be used to perform other operations
+	 * in Bluemix.
+	 * 
+	 * @return the CloundFoundClient instance
+	 */
 	public CloudFoundryClient getClient() {
 		return client;
 	}

@@ -12,6 +12,12 @@ import org.junit.Test;
 import cf.client.bluemix.BluemixClient;
 import cf.client.bluemix.BluemixClientException;
 
+/**
+ * BluemixClient Test class.
+ * 
+ * @author Mariana Ramos Franco
+ *
+ */
 public class BluemixClientTest {
 
 	// Bluemix credentials
@@ -23,6 +29,12 @@ public class BluemixClientTest {
 	
 	private static BluemixClient client; 
 	
+	/**
+	 * Test initialization.
+	 * Creates the BluemixClient instance and logs in.
+	 *   
+	 * @throws BluemixClientException
+	 */
 	@BeforeClass
 	public static void init() throws BluemixClientException {
 		String orgName = user;
@@ -31,11 +43,21 @@ public class BluemixClientTest {
 		client.login();
 	}
 	
+	/**
+	 * Test finalization.
+	 * Logs out from Bluemix in the end of all tests.
+	 */
 	@AfterClass
 	public static void logout() {
 		client.logout();
 	}
 	
+	/**
+	 * Creates a SQL DB service and deploys a WAR file using the liberty buildpack.
+	 * The service and the application are deleted in the end of the test.
+	 * 
+	 * @throws BluemixClientException
+	 */
 	@Test
 	public void deployWAR() throws BluemixClientException {
 		// creating a db service
@@ -60,6 +82,12 @@ public class BluemixClientTest {
 		client.deleteService(dbName);
 	}
 	
+	/**
+	 * Deploys a NodeJS application in Bluemix.
+	 * The application is deleted in the end of the test.
+	 * 
+	 * @throws BluemixClientException
+	 */
 	@Test
 	public void deployNode() throws BluemixClientException {
 		// creating a new application

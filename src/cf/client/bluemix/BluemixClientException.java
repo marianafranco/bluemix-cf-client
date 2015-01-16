@@ -1,8 +1,9 @@
 package cf.client.bluemix;
 
 /**
+ * Exception class for the BluemixClient.
  * 
- * @author marianafranco
+ * @author Mariana Ramos Franco
  *
  */
 public class BluemixClientException extends Exception {
