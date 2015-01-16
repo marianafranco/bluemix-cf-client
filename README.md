@@ -47,5 +47,5 @@ Examples
 You can find some examples about how to use this library on the [**BluemixClientTest**](https://github.com/marianafranco/bluemix-cf-client/blob/master/test/cf/client/bluemix/test/BluemixClientTest.java) class.
 
 For now, there are two tests showing how to deploy a NodeJS and Java application. To run the tests you need to set some environment variables:
-- the BLUEMIX_USER and BLUEMIX_PASSWORD with your credentials;
-- and the BLUEMIX_API with the API endpoint URL used to access Bluemix (e.g. "https://api.ng.bluemix.net").
+- the **BLUEMIX_USER** and **BLUEMIX_PASSWORD** with your credentials;
+- and the **BLUEMIX_API** with the API endpoint URL used to access Bluemix (e.g. "https://api.ng.bluemix.net").
