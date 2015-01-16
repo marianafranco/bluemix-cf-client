@@ -18,13 +18,16 @@ public class BluemixClientTest {
 	private static String user = System.getenv("BLUEMIX_USER");
 	private static String password = System.getenv("BLUEMIX_PASSWORD");
 	
+	// API endpoint (version 2.2.0) used to access Bluemix (e.g. "https://api.ng.bluemix.net")
+	private static final String api = System.getenv("BLUEMIX_API");
+	
 	private static BluemixClient client; 
 	
 	@BeforeClass
 	public static void init() throws BluemixClientException {
 		String orgName = user;
 		String spaceName = "dev";
-		client = new BluemixClient(user, password, orgName, spaceName);
+		client = new BluemixClient(user, password, orgName, spaceName, api);
 		client.login();
 	}
 	

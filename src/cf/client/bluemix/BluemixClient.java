@@ -24,15 +24,12 @@ public class BluemixClient {
 	
 	private static final Logger LOGGER = Logger.getLogger(BluemixClient.class.getName());
 
-	// API endpoint (version 2.2.0) used to access bluemix (e.g. "https://api.ng.bluemix.net")
-	private static final String BLUEMIX_API = System.getenv("BLUEMIX_API");
-	
 	private CloudFoundryClient client;
 	
-	public BluemixClient(String user, String password, String orgName, String spaceName)
+	public BluemixClient(String user, String password, String orgName, String spaceName, String api)
 			throws BluemixClientException {
 		CloudCredentials credentials = new CloudCredentials(user, password);
-		URL target = getTarget();
+		URL target = getTarget(api);
 		client = new CloudFoundryClient(credentials, target, orgName, spaceName);
 	}
 	
@@ -150,9 +147,9 @@ public class BluemixClient {
 		return client;
 	}
 	
-	private static URL getTarget() throws BluemixClientException {
+	private static URL getTarget(String api) throws BluemixClientException {
 		try {
-			return URI.create(BLUEMIX_API).toURL();
+			return URI.create(api).toURL();
 		} catch (MalformedURLException e) {
 			String message = "Invalid target URI. Error: " + e.getLocalizedMessage();
 			throw new BluemixClientException(message, e);
